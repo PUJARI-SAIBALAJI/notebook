@@ -169,7 +169,7 @@ const UserProfile = () => {
               >
                 <h2 className={`text-3xl font-bold text-gray-700 mb-4 `}>
                   {data.name}
-                  {/* Jabed Ali Mollah */}
+                
                 </h2>
                 <span className={`text-green-800 font-bold text-lg`}>
                   Profile
