@@ -332,44 +332,60 @@ const UserNotes = () => {
 
       {/* AI Summary Modal */}
       {showAISummary && (
-  <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-    {/* Increased width (max-w-4xl) and height (max-h-[95vh]) */}
-    <div className="bg-white p-8 rounded-lg w-full max-w-4xl max-h-[95vh] flex flex-col">
-      <div className="flex justify-between items-center mb-6">
-        <h3 className="text-2xl font-bold text-blue-600">
-          <FaRobot className="inline mr-3" />
+  <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+    <div className="bg-white rounded-2xl shadow-2xl w-full max-w-7xl h-[90vh] flex flex-col overflow-hidden">
+      
+      {/* Header */}
+      <div className="flex items-center justify-between px-6 py-4 border-b border-gray-300">
+        <h2 className="text-2xl font-bold text-blue-600 flex items-center">
+          <FaRobot className="mr-2" size={24} />
           AI Summary
-        </h3>
-        <button 
+        </h2>
+        <button
           onClick={closeAISummary}
-          className="text-gray-500 hover:text-gray-700 text-3xl"
+          className="text-gray-600 hover:text-red-500 text-3xl"
         >
           &times;
         </button>
       </div>
-      
-      {/* Scrollable content area with increased spacing */}
-      <div className="flex-1 overflow-y-auto space-y-6">
-        <div>
-          <h4 className="font-semibold text-lg mb-3">Original Text:</h4>
-          <div className="text-gray-700 bg-gray-100 p-4 rounded-lg max-h-[30vh] overflow-y-auto">
-            {currentNoteContent}
+
+      {/* Content */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 px-6 py-4 flex-1 overflow-hidden">
+        
+        {/* Original Text */}
+        <div className="flex flex-col h-full">
+          <h4 className="text-lg font-semibold mb-2">Original Text:</h4>
+          <div className="border border-gray-300 bg-gray-50 rounded-lg p-4 overflow-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 min-h-[300px] max-h-[calc(90vh-250px)]">
+            <pre className="text-sm whitespace-pre-wrap break-words">
+              {currentNoteContent || (
+                <span className="text-gray-400">No content available</span>
+              )}
+            </pre>
           </div>
         </div>
-        
-        <div>
-          <h4 className="font-semibold text-lg mb-3">Summary:</h4>
-          <div className="text-gray-800 bg-blue-50 p-5 rounded-lg max-h-[40vh] overflow-y-auto">
-            {aiSummary || "Generating summary..."}
+
+        {/* AI Summary */}
+        <div className="flex flex-col h-full">
+          <h4 className="text-lg font-semibold mb-2">Summary:</h4>
+          <div className="border border-blue-300 bg-blue-50 rounded-lg p-4 overflow-auto scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-blue-100 min-h-[300px] max-h-[calc(90vh-250px)]">
+            {aiSummary ? (
+              <div className="text-base whitespace-pre-wrap break-words">
+                {aiSummary}
+              </div>
+            ) : (
+              <div className="h-full flex items-center justify-center text-gray-500">
+                Generating summary...
+              </div>
+            )}
           </div>
         </div>
       </div>
-      
-      {/* Larger close button with more padding */}
-      <div className="flex justify-end pt-4">
+
+      {/* Footer */}
+      <div className="px-6 py-4 border-t border-gray-300 text-center">
         <button
           onClick={closeAISummary}
-          className="bg-blue-500 hover:bg-blue-600 text-white py-3 px-8 rounded-lg text-lg"
+          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg"
         >
           Close
         </button>
